@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/ProtossGenius/smnric/smn_file"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
 	"github.com/ProtossGenius/SureMoonNet/smn/analysis/proto_msg_map"
 )
 

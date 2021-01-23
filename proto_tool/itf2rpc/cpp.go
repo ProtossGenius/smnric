@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ProtossGenius/smnric/smn_file"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
 	"github.com/ProtossGenius/smnric/smn_pglang"
 	"github.com/ProtossGenius/SureMoonNet/smn/proto_tool/goitf2lang"
 )

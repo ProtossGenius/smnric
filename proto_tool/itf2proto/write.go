@@ -5,10 +5,10 @@ import (
 	"log"
 	"strings"
 
-	"github.com/ProtossGenius/smnric/smn_file"
-	"github.com/ProtossGenius/smnric/smn_muti_write_cache"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_muti_write_cache"
 	"github.com/ProtossGenius/smnric/smn_pglang"
-	"github.com/ProtossGenius/smnric/smn_str"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
 )
 
 func WriteProto(outDir string, list []*smn_pglang.ItfDef) error {

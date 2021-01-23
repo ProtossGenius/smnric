@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"time"
 
-	"github.com/ProtossGenius/smnric/smn_file"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
 )
 
 /*

@@ -1,9 +1,9 @@
 package smn_godll_head
 
 import (
-	"github.com/ProtossGenius/smnric/smn_file"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
 	"github.com/ProtossGenius/smnric/smn_pglang"
-	"github.com/ProtossGenius/smnric/smn_str"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
 	"strings"
 )
 

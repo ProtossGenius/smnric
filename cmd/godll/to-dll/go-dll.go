@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/ProtossGenius/smnric/smn_data"
-	"github.com/ProtossGenius/smnric/smn_file"
-	"github.com/ProtossGenius/smnric/smn_str_rendering"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_data"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_str_rendering"
 	"flag"
 	"strings"
 )

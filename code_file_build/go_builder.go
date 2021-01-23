@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/ProtossGenius/smnric/smn_analysis_go/line_analysis"
-	"github.com/ProtossGenius/smnric/smn_file"
-	"github.com/ProtossGenius/smnric/smn_str"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
 )
 
 func GoPkg(cf *CodeFile, pkg string) {

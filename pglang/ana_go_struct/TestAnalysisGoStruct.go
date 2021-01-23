@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/ProtossGenius/pglang/snreader"
 	"github.com/ProtossGenius/smnric/smn_analysis_go/line_analysis"
-	"github.com/ProtossGenius/smnric/smn_data"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_data"
 	"fmt"
 	"strings"
 	"time"

@@ -6,7 +6,7 @@ import (
 	"runtime/debug"
 	"strings"
 
-	"github.com/ProtossGenius/smnric/smn_muti_write_cache"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_muti_write_cache"
 )
 
 const (

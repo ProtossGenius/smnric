@@ -3,10 +3,10 @@ package main
 import (
 	"github.com/ProtossGenius/smnric/smn_analysis_cpp/smn_godll_head"
 	"github.com/ProtossGenius/smnric/smn_analysis_go/smn_anlys_go_tif"
-	"github.com/ProtossGenius/smnric/smn_data"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_data"
 	"github.com/ProtossGenius/smnric/smn_pglang"
-	"github.com/ProtossGenius/smnric/smn_str"
-	"github.com/ProtossGenius/smnric/smn_str_rendering"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_str_rendering"
 	"flag"
 	"strings"
 )
