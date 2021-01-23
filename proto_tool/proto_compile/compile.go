@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
-	"github.com/ProtossGenius/SureMoonNet/smn/analysis/proto_msg_map"
+	"github.com/ProtossGenius/smnric/analysis/proto_msg_map"
 )
 
 func protoHead(pkg string) string {

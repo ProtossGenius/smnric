@@ -10,7 +10,7 @@ import (
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
 	"github.com/ProtossGenius/smnric/smn_pglang"
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
-	"github.com/ProtossGenius/SureMoonNet/smn/code_file_build"
+	"github.com/ProtossGenius/smnric/code_file_build"
 )
 
 const (
@@ -19,7 +19,7 @@ const (
 	// SmnBase smn_base .
 	SmnBase = "github.com/ProtossGenius/SureMoonNet/pb/smn_base"
 	// SmnRPC smn_rpc .
-	SmnRPC = "github.com/ProtossGenius/SureMoonNet/smn/net_libs/smn_rpc"
+	SmnRPC = "github.com/ProtossGenius/smnric/net_libs/smn_rpc"
 	// SmnConnFunc .
 	SmnConnFunc = "smn_rpc.ConnFunc"
 )
@@ -372,7 +372,7 @@ func GoAsynClient(path, module, itfFullPkg string, itf *smn_pglang.ItfDef) error
 			b.Imports(SmnRPC)
 			b.Imports("sync")
 			b.Imports("github.com/ProtossGenius/SureMoonNet/basis/smn_err")
-			b.Imports("github.com/ProtossGenius/SureMoonNet/smn/proto_tool/itf2rpc")
+			b.Imports("github.com/ProtossGenius/smnric/proto_tool/itf2rpc")
 		}
 		{ //  new func
 			b := gof.AddBlock("func NewCltRpc%s(conn smn_rpc.MessageAdapterItf, cacheSize int) *CltRpc%s", itf.Name, itf.Name)

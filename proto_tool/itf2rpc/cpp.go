@@ -7,7 +7,7 @@ import (
 
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
 	"github.com/ProtossGenius/smnric/smn_pglang"
-	"github.com/ProtossGenius/SureMoonNet/smn/proto_tool/goitf2lang"
+	"github.com/ProtossGenius/smnric/proto_tool/goitf2lang"
 )
 
 func hasPkg(typ string) (pkg string) {

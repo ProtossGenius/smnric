@@ -3,7 +3,7 @@ package smn_rpc
 import (
 	"net"
 
-	"github.com/ProtossGenius/SureMoonNet/smn/net_libs/muti_service"
+	"github.com/ProtossGenius/smnric/net_libs/muti_service"
 )
 
 func NewRPCServiceManager(conn net.Conn) *muti_service.ServiceManager {
