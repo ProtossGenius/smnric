@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_err"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_net"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_stream"
+	"github.com/ProtossGenius/smnric/smn_err"
+	"github.com/ProtossGenius/smnric/smn_net"
+	"github.com/ProtossGenius/smnric/smn_stream"
 	"github.com/ProtossGenius/SureMoonNet/pb/smn_base"
 	"google.golang.org/protobuf/proto"
 	"github.com/pkg/errors"

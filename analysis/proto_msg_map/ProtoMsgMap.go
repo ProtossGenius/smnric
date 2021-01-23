@@ -6,8 +6,8 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
+	"github.com/ProtossGenius/smnric/smn_file"
+	"github.com/ProtossGenius/smnric/smn_str"
 )
 
 type ProtoMsgMap struct {

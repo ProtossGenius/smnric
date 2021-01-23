@@ -3,7 +3,7 @@ package goitf2lang
 import (
 	"fmt"
 
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_pglang"
+	"github.com/ProtossGenius/smnric/smn_pglang"
 )
 
 //use checkerr can let code num less.

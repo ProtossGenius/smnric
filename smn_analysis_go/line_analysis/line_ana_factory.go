@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/ProtossGenius/pglang/snreader"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_analysis_go/smn_anlys_go_tif"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_pglang"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
+	"github.com/ProtossGenius/smnric/smn_analysis_go/smn_anlys_go_tif"
+	"github.com/ProtossGenius/smnric/smn_pglang"
+	"github.com/ProtossGenius/smnric/smn_str"
 )
 
 // only for easy analysis.

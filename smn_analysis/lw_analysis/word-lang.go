@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/ProtossGenius/pglang/snreader"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_pglang"
+	"github.com/ProtossGenius/smnric/smn_pglang"
 )
 
 const (

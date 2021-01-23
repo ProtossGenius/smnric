@@ -4,10 +4,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_analysis_go/line_analysis"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_pglang"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
+	"github.com/ProtossGenius/smnric/smn_analysis_go/line_analysis"
+	"github.com/ProtossGenius/smnric/smn_file"
+	"github.com/ProtossGenius/smnric/smn_pglang"
+	"github.com/ProtossGenius/smnric/smn_str"
 )
 
 func getPkg(lines []string) string {

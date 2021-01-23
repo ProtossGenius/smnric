@@ -6,10 +6,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_exec"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_pglang"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
+	"github.com/ProtossGenius/smnric/smn_exec"
+	"github.com/ProtossGenius/smnric/smn_file"
+	"github.com/ProtossGenius/smnric/smn_pglang"
+	"github.com/ProtossGenius/smnric/smn_str"
 	"github.com/ProtossGenius/SureMoonNet/smn/code_file_build"
 )
 
@@ -371,7 +371,7 @@ func GoAsynClient(path, module, itfFullPkg string, itf *smn_pglang.ItfDef) error
 			b.Imports(module + "/pb/smn_dict")
 			b.Imports(SmnRPC)
 			b.Imports("sync")
-			b.Imports("github.com/ProtossGenius/SureMoonNet/basis/smn_err")
+			b.Imports("github.com/ProtossGenius/smnric/smn_err")
 			b.Imports("github.com/ProtossGenius/SureMoonNet/smn/proto_tool/itf2rpc")
 		}
 		{ //  new func

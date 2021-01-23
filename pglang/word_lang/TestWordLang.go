@@ -2,8 +2,8 @@ package main
 
 import (
 	"bufio"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_analysis/lw_analysis"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_data"
+	"github.com/ProtossGenius/smnric/smn_analysis/lw_analysis"
+	"github.com/ProtossGenius/smnric/smn_data"
 	"fmt"
 	"os"
 	"time"

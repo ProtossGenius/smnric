@@ -1,8 +1,8 @@
 package smn_pglang
 
 import (
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_data"
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
+	"github.com/ProtossGenius/smnric/smn_data"
+	"github.com/ProtossGenius/smnric/smn_file"
 	"os"
 	"strings"
 )

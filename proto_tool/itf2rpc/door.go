@@ -3,7 +3,7 @@ package itf2rpc
 import (
 	"fmt"
 
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_pglang"
+	"github.com/ProtossGenius/smnric/smn_pglang"
 )
 
 //FWriteRPC write RPC.

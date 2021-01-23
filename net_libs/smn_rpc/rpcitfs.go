@@ -3,7 +3,7 @@ package smn_rpc
 import (
 	"net"
 
-	"github.com/ProtossGenius/SureMoonNet/basis/smn_net"
+	"github.com/ProtossGenius/smnric/smn_net"
 	"github.com/ProtossGenius/SureMoonNet/pb/smn_base"
 	"google.golang.org/protobuf/proto"
 )
