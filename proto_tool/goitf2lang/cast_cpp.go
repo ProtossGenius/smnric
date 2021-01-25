@@ -2,7 +2,6 @@ package goitf2lang
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
@@ -149,12 +148,9 @@ func CppNeedInc(itf *smn_pglang.ItfDef, openRet bool, needPrmPkg bool, init ...s
 	return result
 }
 
-func WriteCppItf(out, pkg string, itf *smn_pglang.ItfDef) {
-	dir := out + "/smn_itf/"
-	if !smn_file.IsFileExist(dir) {
-		err := os.MkdirAll(dir, os.ModePerm)
-		checkerr(err)
-	}
+// WriteCppItf write cpp interface from go-interface-define.
+func WriteCppItf(dir, pkg string, itf *smn_pglang.ItfDef) {
+	checkerr(smn_file.MakeSureDirExist(dir))
 	dir += pkg + "."
 	f, err := smn_file.CreateNewFile(dir + itf.Name + ".h")
 	checkerr(err)
