@@ -1,12 +1,11 @@
 package proto_compile
 
 import (
-	"bytes"
 	"fmt"
 	"os"
-	"os/exec"
 	"strings"
 
+	"github.com/ProtossGenius/SureMoonNet/basis/smn_exec"
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
 	"github.com/ProtossGenius/smnric/analysis/proto_msg_map"
 )
@@ -126,12 +125,8 @@ func DefautCompile(in, out, goMoudle, ignoreDir, comp string) error {
 			return smn_file.FILE_DO_FUNC_RESULT_NO_DEAL
 		}
 		if strings.HasSuffix(info.Name(), ".proto") {
-			var stderr bytes.Buffer
-			c := exec.Command("protoc", fmt.Sprintf(comp, out), "-I", in+"/temp/", path)
-			c.Stderr = &stderr
-			err := c.Run()
-			if err != nil {
-				panic(fmt.Errorf("%s: %s", err.Error(), stderr.String()))
+			if err := smn_exec.EasyDirExec(".", "protoc", fmt.Sprintf(comp, out), "-I", in+"/temp/", path); err != nil {
+				panic(err)
 			}
 		}
 		return smn_file.FILE_DO_FUNC_RESULT_DEFAULT
@@ -142,24 +137,27 @@ func DefautCompile(in, out, goMoudle, ignoreDir, comp string) error {
 }
 
 func CppCompile(in, out, goMoudle, ignoreDir, comp string) error {
-	var ret_err error
-	smn_file.DeepTraversalDir(in, func(path string, info os.FileInfo) smn_file.FileDoFuncResult {
+	var retErr error
+
+	_, err := smn_file.DeepTraversalDir(in, func(path string, info os.FileInfo) smn_file.FileDoFuncResult {
 		if info.IsDir() && info.Name() == ignoreDir {
 			return smn_file.FILE_DO_FUNC_RESULT_NO_DEAL
 		}
+
 		if strings.HasSuffix(info.Name(), ".proto") {
-			var stderr bytes.Buffer
-			c := exec.Command("protoc", fmt.Sprintf(comp, out), "-I", in, path)
-			c.Stderr = &stderr
-			err := c.Run()
-			if err != nil {
-				ret_err = err
+			if err := smn_exec.EasyDirExec(".", "protoc", fmt.Sprintf(comp, out), "-I", in+"/temp/", path); err != nil {
+				retErr = err
 				return smn_file.FILE_DO_FUNC_RESULT_STOP_TRAV
 			}
 		}
+
 		return smn_file.FILE_DO_FUNC_RESULT_DEFAULT
 	})
-	return ret_err
+	if err != nil {
+		return err
+	}
+
+	return retErr
 }
 
 func Compile(protoDir, codeOutPath, goMod, lang string) error {
