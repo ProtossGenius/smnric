@@ -145,7 +145,7 @@ func CppCompile(in, out, goMoudle, ignoreDir, comp string) error {
 		}
 
 		if strings.HasSuffix(info.Name(), ".proto") {
-			if err := smn_exec.EasyDirExec(".", "protoc", fmt.Sprintf(comp, out), "-I", in+"/temp/", path); err != nil {
+			if err := smn_exec.EasyDirExec(".", "protoc", fmt.Sprintf(comp, out), "-I", in, path); err != nil {
 				retErr = err
 				return smn_file.FILE_DO_FUNC_RESULT_STOP_TRAV
 			}
