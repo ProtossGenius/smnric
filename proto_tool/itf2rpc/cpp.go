@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
-	"github.com/ProtossGenius/smnric/smn_pglang"
 	"github.com/ProtossGenius/smnric/proto_tool/goitf2lang"
+	"github.com/ProtossGenius/smnric/smn_pglang"
 )
 
 func hasPkg(typ string) (pkg string) {
@@ -213,7 +213,7 @@ func cppServerHead(dir string, itf *smn_pglang.ItfDef) error {
 #include <string>
 #include <functional>
 #include "smncpp/asio_server.h"
-#include "smn_itf/%s.%s.h"
+#include "%s.%s.h"
 `, pkg, itf.Name)
 
 	writef(fmt.Sprintf("#include \"pb/rip_%s.pb.h\"", pkg))
