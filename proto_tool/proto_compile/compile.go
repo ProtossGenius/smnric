@@ -10,13 +10,18 @@ import (
 	"github.com/ProtossGenius/smnric/analysis/proto_msg_map"
 )
 
-func protoHead(pkg string) string {
-	return fmt.Sprintf("syntax = \"proto3\";\noption java_package = \"pb\";"+
-		"\noption java_outer_classname=\"%s\";\npackage %s;\n\n", pkg, pkg)
+func protoHead(pkg, module string) string {
+	return fmt.Sprintf(`syntax = "proto3";
+option java_package = "pb";
+option java_outer_classname="%s";
+option go_package = "%s/pb/%s;%s";
+package %s;
+
+`, pkg, module, pkg, pkg, pkg)
 }
 
 //生成字典协议
-func Dict(in string) error {
+func Dict(in, module string) error {
 	list, _, err := proto_msg_map.Dict(in)
 	if err != nil {
 		return err
@@ -27,7 +32,7 @@ func Dict(in string) error {
 		return err
 	}
 	defer file.Close()
-	_, err = file.WriteString(protoHead("smn_dict"))
+	_, err = file.WriteString(protoHead("smn_dict", module))
 
 	if err != nil {
 		return err
@@ -72,69 +77,7 @@ func getPkg(path string) string {
 
 type compileFunc func(in, out, exportPath, ignoreDir, comp string) error
 
-var CompileMap = map[string]compileFunc{
-	"cpp":  CppCompile,
-	"java": CppCompile,
-}
-
-func DefautCompile(in, out, goMoudle, ignoreDir, comp string) error {
-	var retErr error
-	smn_file.DeepTraversalDir(in, func(path string, info os.FileInfo) smn_file.FileDoFuncResult {
-		if !info.IsDir() && strings.HasSuffix(info.Name(), ".proto") {
-			op := in + "/temp/" + getPkg(path)
-			op2 := in + "/temp/" + goMoudle + getPkg(path)
-			os.MkdirAll(op, os.ModePerm)
-			os.MkdirAll(op2, os.ModePerm)
-			data, err := smn_file.FileReadAll(path)
-			if err != nil {
-				retErr = err
-				return smn_file.FILE_DO_FUNC_RESULT_STOP_TRAV
-			}
-			lines := strings.Split(string(data), "\n")
-			file, err := smn_file.CreateNewFile(op + "/" + info.Name())
-			if err != nil {
-				retErr = err
-				return smn_file.FILE_DO_FUNC_RESULT_STOP_TRAV
-			}
-			defer file.Close()
-			file2, err := smn_file.CreateNewFile(op2 + "/" + info.Name())
-			if err != nil {
-				retErr = err
-				return smn_file.FILE_DO_FUNC_RESULT_STOP_TRAV
-			}
-			for _, line := range lines {
-				nl := strings.TrimSpace(line)
-				if strings.HasPrefix(nl, "import") {
-					nl = strings.Split(nl[6:], ";")[0]
-					nl = strings.Replace(nl, "\"", "", -1)
-					nl = strings.TrimSpace(nl)
-					if smn_file.IsFileExist(in + "/" + nl) {
-						line = strings.Replace(line, nl, goMoudle+getPkg(in+"/"+nl)+"/"+nl, -1)
-					}
-				}
-				file.WriteString(line + "\n")
-				file2.WriteString(line + "\n")
-			}
-			file.Close()
-			file2.Close()
-		}
-		return smn_file.FILE_DO_FUNC_RESULT_DEFAULT
-	})
-	smn_file.DeepTraversalDir(in+"/temp/", func(path string, info os.FileInfo) smn_file.FileDoFuncResult {
-		if info.IsDir() && info.Name() == ignoreDir {
-			return smn_file.FILE_DO_FUNC_RESULT_NO_DEAL
-		}
-		if strings.HasSuffix(info.Name(), ".proto") {
-			if err := smn_exec.EasyDirExec(".", "protoc", fmt.Sprintf(comp, out), "-I", in+"/temp/", path); err != nil {
-				panic(err)
-			}
-		}
-		return smn_file.FILE_DO_FUNC_RESULT_DEFAULT
-	})
-	os.RemoveAll(in + "/temp")
-
-	return retErr
-}
+var CompileMap = map[string]compileFunc{}
 
 func CppCompile(in, out, goMoudle, ignoreDir, comp string) error {
 	var retErr error
@@ -168,16 +111,17 @@ func Compile(protoDir, codeOutPath, goMod, lang string) error {
 		}
 	}
 
-	if err := Dict(protoDir); err != nil {
+	if err := Dict(protoDir, goMod); err != nil {
 		return err
 	}
 
-	comp := "--" + lang + "_out=%s" //"--go_out=%s"
-	extPath := strings.Replace(goMod, "\\", "/", -1) + "/" + strings.Replace(codeOutPath, "./", "", -1)
+	comp := "--" + lang + "_out=%s" // "--go_out=%s"
+	extPath := strings.ReplaceAll(goMod, "\\", "/") + "/" + strings.ReplaceAll(codeOutPath, "./", "")
 	ignoreDir := strings.Split(extPath, "/")[0]
 
 	if f, ok := CompileMap[lang]; ok {
 		return f(protoDir, codeOutPath, extPath, ignoreDir, comp)
 	}
-	return DefautCompile(protoDir, codeOutPath, extPath, ignoreDir, comp)
+
+	return CppCompile(protoDir, codeOutPath, extPath, ignoreDir, comp)
 }

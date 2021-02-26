@@ -3,27 +3,39 @@ package itf2proto
 import (
 	"fmt"
 	"log"
+	"os"
 	"strings"
 
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_muti_write_cache"
-	"github.com/ProtossGenius/smnric/smn_pglang"
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
+	"github.com/ProtossGenius/smnric/smn_pglang"
 )
 
-func WriteProto(outDir string, list []*smn_pglang.ItfDef) error {
+// WriteProto write itf to proto.
+func WriteProto(outDir, module string, list []*smn_pglang.ItfDef) (err error) {
 	pkg := list[0].Package
 	oPath := outDir + "/rip_" + pkg + ".proto"
-	file, err := smn_file.CreateNewFile(oPath)
-	if err != nil {
+
+	var file *os.File
+
+	if file, err = smn_file.CreateNewFile(oPath); err != nil {
 		return err
 	}
+
 	defer file.Close()
+
 	w := smn_muti_write_cache.NewFileMutiWriteCache()
 	writeLine := func(f string, a ...interface{}) {
-		w.WriteTail(fmt.Sprintf(f, a...) + "\n")
+		_, _ = w.WriteTail(fmt.Sprintf(f, a...) + "\n")
 	}
-	w.Append(smn_muti_write_cache.NewStrCache(fmt.Sprintf("syntax = \"proto3\";\noption java_package = \"pb\";\noption java_outer_classname=\"%s\";\npackage rip_%s;\n", pkg, pkg)))
+
+	w.Append(smn_muti_write_cache.NewStrCache(fmt.Sprintf(`syntax = "proto3";
+	option java_package = "pb";
+	option java_outer_classname="rip_%s";
+	option go_package = "%s/pb/rip_%s;rip_%s";
+	package rip_%s;
+`, pkg, module, pkg, pkg, pkg)))
 	impts := smn_muti_write_cache.NewStrCache()
 	impMap := make(map[string]bool)
 	checkImport := func(typ string) {
