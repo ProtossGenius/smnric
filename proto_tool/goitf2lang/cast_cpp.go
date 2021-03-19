@@ -179,6 +179,7 @@ namespace %s{
 	for _, f := range itf.Functions {
 		writef("\tvirtual %s %s(%s) = 0;\n", TooCppRet(f.Returns, pkg, itf.Name, f.Name), f.Name, ToCppParam(f.Params))
 	}
+	writef("\n\tvirtual ~%s(){}", itf.Name)
 }
 
 func WriteCppPkg(out, pkg string, list []*smn_pglang.ItfDef) {
