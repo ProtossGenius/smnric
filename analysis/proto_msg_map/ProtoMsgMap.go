@@ -24,32 +24,48 @@ func GetProtoMsgMap(path string) (m *ProtoMsgMap, err error) {
 	if err != nil {
 		return nil, err
 	}
+
 	m = NewProtoMsgMap()
 	lines := strings.Split(string(data), "\n")
+
 	var pkg string
+
 	for _, line := range lines {
 		line = strings.TrimSpace(line)
 		if line == "" {
 			continue
 		}
+
 		if strings.HasPrefix(line, "package") {
 			pkg = strings.Split(line[7:], ";")[0]
 			pkg = strings.TrimSpace(pkg)
 			m.Pkg = pkg
+
 			continue
 		}
+
 		if strings.Contains(line, "message") {
+			if (strings.HasPrefix(line, "//") || strings.HasPrefix(line, "/*")) &&
+				!strings.HasPrefix(strings.TrimSpace(line[2:]), "message") {
+				continue
+			}
+
+			if !strings.HasPrefix(line, "message") {
+				continue
+			}
+
 			n := strings.Split(line, "message")[1]
 			n = strings.Split(n, "{")[0]
 			n = strings.TrimSpace(n)
+
 			if strings.HasPrefix(line, "//") {
 				m.MsgMap[n] = false
 			} else {
 				m.MsgMap[n] = true
 			}
-
 		}
 	}
+
 	return
 }
 
