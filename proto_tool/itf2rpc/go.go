@@ -8,9 +8,9 @@ import (
 
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_exec"
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_file"
-	"github.com/ProtossGenius/smnric/smn_pglang"
 	"github.com/ProtossGenius/SureMoonNet/basis/smn_str"
 	"github.com/ProtossGenius/smnric/code_file_build"
+	"github.com/ProtossGenius/smnric/smn_pglang"
 )
 
 const (
@@ -97,6 +97,9 @@ func anaFuncDef4Go(f *smn_pglang.FuncDef, tryImport func(string), gof *code_file
 
 func goi64toi(ot, v string) (string, bool) {
 	isArr, typ := smn_str.ProtoUseDeal(ot)
+	if typ == "bytes" {
+		return v, false
+	}
 	if strings.Contains(ot, typ) {
 		return v, false
 	}
@@ -118,6 +121,9 @@ func goi64toi(ot, v string) (string, bool) {
 
 func goitoi64(ot, v string) (string, bool) {
 	isArr, typ := smn_str.ProtoUseDeal(ot)
+	if typ == "bytes" {
+		return v, false
+	}
 	if strings.Contains(ot, typ) {
 		return v, false
 	}
