@@ -11,7 +11,7 @@ func NewRPCServiceManager(conn net.Conn) *muti_service.ServiceManager {
 	return sm
 }
 
-func AccpterRun(adapter MessageAdapterItf, rpcSvr RpcSvrItf) {
+func AccpterRun(adapter MessageAdapterItf, rpcSvr RICSvrItf) {
 	for {
 		msg, err := adapter.ReadCall()
 		dict, res, err := rpcSvr.OnMessage(msg, adapter.GetConn())
@@ -19,7 +19,7 @@ func AccpterRun(adapter MessageAdapterItf, rpcSvr RpcSvrItf) {
 	}
 }
 
-func ServiceManagerRegister(mgr *muti_service.ServiceManager, no int64, desc string, rpcSvr RpcSvrItf) (isExist bool) {
+func ServiceManagerRegister(mgr *muti_service.ServiceManager, no int64, desc string, rpcSvr RICSvrItf) (isExist bool) {
 	conn, isExist := mgr.Regitster(no, desc)
 	if isExist {
 		return true

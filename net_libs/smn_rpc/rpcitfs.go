@@ -16,8 +16,9 @@ type ConnFunc func(conn net.Conn)
 
 // StructCall  MessageAdapterItf's Param .
 type StructCall struct {
-	Dict int32
-	Msg  proto.Message
+	Dict     int32
+	Msg      proto.Message
+	Callback func(*smn_base.Ret)
 }
 
 // StructResult result .
@@ -26,8 +27,9 @@ type StructResult struct {
 	Ret      *smn_base.Ret
 }
 
-type RpcSvrItf interface {
-	//@ret d -> dict, _p proto.Message, _e error
+// RICSvrItf rpc server interface.
+type RICSvrItf interface {
+	// OnMessage @ret d -> dict, _p proto.Message, _e error.
 	OnMessage(c *smn_base.Call, conn net.Conn) (_d int32, _p proto.Message, _e error)
 }
 
